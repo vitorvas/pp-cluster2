@@ -14,7 +14,7 @@
 %INAC2017 SETUP: SPECIFY AUTHOR NAMES, AFFILIATION, ADDRESS AND E-MAIL.
 
 \author{
-  \bf{Vitor V. A. Silva, Andr\'e A. C. dos Santos and Daniel A. M. Campolina}\\ \\
+  \bf{Vitor V. A. Silva, Andr\'e A. C. dos Santos, Daniel A. M. Campolina and Graiciany P. Barros}\\ \\
   CDTN - Centro de Desenvolvimento da Tecnologia Nuclear\\
   Av. Ant\^onio Carlos 6627 - Campus UFMG\\
   31270-901 - Belo Horizonte, MG\\
@@ -111,13 +111,26 @@ being scientists and its own technical staff at the same time.
 %------------------------------------------------------------------------------
 \section{OBJECTIVE}
 
-%The objective of this paper is to present the challenges, problems and solutions proposed
-%to setup a professional computational cluster to carry heavy numerical calculations focused in
-%neutronics and thermal-hydraulics of nuclear reactors in a
-%context of a small research team.
+The objective of this work is to present the current status of the cluster equipament 
+at the Laboratory of Thermal-hydraulics and Neutronics of CDTN, describing the decisions 
+taken during the installation process, the solutions applied to common (and uncommon) problems 
+derived from running a professional cluster system. Together with technical decisions, the 
+performance of the system is asserted by comparison to the older system used by the laboratory 
+team. 
 
 %------------------------------------------------------------------------------
 \section{METHODS AND PROCEDURES}
+
+Main information to be detailed: the cluster uses hostbased authentication, GPU used via 
+vnc, \texttt{data} directory at each user account pointing to gluster, how many gluster 
+volumes (why two, how they are configured - distributed) and what each one stores, 
+the NAS configuration (related to the cluster).
+
+Must update the old figures accordingly. Pehaps add two more figures showing NAS 
+and on the internal structure of gluster/NAS.
+
+List the applications running (if possible with some benchmarks) and installed. 
+Future work, if something is still missing.
 
 %------------------------------------------------------------------------------
 \subsection{Local Structure}
