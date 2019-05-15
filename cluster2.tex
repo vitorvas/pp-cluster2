@@ -1,4 +1,4 @@
-\documentclass[twoside,a4paper,12pt,english]{inac17}
+\documentclass[twoside,a4paper,12pt,english]{inac19}
 
 %INAC2017 SETUP: SET PAGE SIZE AND SET FOR USING graphicx PACKAGE.
 \usepackage{graphicx}
@@ -9,25 +9,29 @@
 
 \usepackage{textcomp}             % Para usar marca registrada
 
-\title{MANAGING AND USING A PROFESSIONAL CLUSTER IN NUCLEAR ENGINEERING APPLICATIONS}
+%\title{MANAGING AND USING A PROFESSIONAL CLUSTER IN NUCLEAR ENGINEERING APPLICATIONS}
+\title{THE LTHN COMPUTER CLUSTER}
 
 %INAC2017 SETUP: SPECIFY AUTHOR NAMES, AFFILIATION, ADDRESS AND E-MAIL.
 
 \author{
-  \bf{Vitor V. A. Silva, Andr\'e A. C. dos Santos, Daniel A. M. Campolina and Graiciany P. Barros}\\ \\
+  \bf{Vitor Vasconcelos, Andr\'e dos Santos,}\\
+  \bf{Daniel Campolina and Graiciany Barros}\\ \\
   CDTN - Centro de Desenvolvimento da Tecnologia Nuclear\\
   Av. Ant\^onio Carlos 6627 - Campus UFMG\\
   31270-901 - Belo Horizonte, MG\\
-  \{vitors, aacs, roc\}@cdtn.br}
+  \{vitors, aacs, campolina, graiciany.barros\}@cdtn.br}
 
+
+}
 \begin{document}
 
 %INAC2017 SETUP: PRINT TITLE
 \maketitle
 
 % Acrescentado para facilitar a redação da NI associada
-\tableofcontents
-\tableofcontents
+%\tableofcontents
+%\tableofcontents
 
 
 %INAC2017 SETUP: SETUP HEADS FOR PAGES
@@ -41,28 +45,31 @@
 
 %--------------------------------------------------------------------------------------
 \begin{abstract_full_paper}
-  The specification, configuration and management of a professional computer cluster are specialized
-tasks usually hold by well trained teams, often full-time hired computer scientists. However, in
-many situations and for widely different reasons, these very specific technical tasks must
-be carried on by no other than the user itself. This is the situation at Centro de Desenvolvimento
-da Tecnologia Nuclear - and in many nuclear research and educational centres in developing countries -
-where the scientists are the users of the cluster but also the technical
-team responsible to keep the system running. This paper presents the process of planning
-and installing the whole operating system and scientific software of a professional cluster
-aimed to be used in the nuclear engineering field from the point of view of its users.
-The drawbacks of lack of expertise and technical skills to
-manage such type of technology are opposed to the advantages of freedom to chose the solutions
-which best fit to the problems to be solved. The details of selected methods or technologies
-chosen for addressing a specific matter are presented together with other possible options, 
-offering a broader view of the whole process of cluster's configuration. Specificities
-of dealing with closed, restricted and open software, common in the nuclear engineering field,
-are also put in perspective. The ideas and solutions presented in this paper can be a
-valuable reference to other research teams found in a similar situation:
-being scientists and its own technical staff at the same time.
+Computers have become a fundamental tool at almost every human activity.
+In science, they're ubiquitous and used so widely that are often neglected
+as a complex tool. A professional computer cluster is a good example of
+this situation. Many high-end computers in expensive hardware configuration
+put together using state-of-the-art software tools usually overlooked by
+users as a 'set of computers'. In this paper we present such scientific tool
+in a particular context: a high-end cluster system installed, managed and operated
+by the very same scientific team which employs it on research on the field of Nuclear Engineering.
+This work describes the main features of the LTHN/CDTN (Thermal-hydraulics and Neutronics
+Laboratory/Nuclear Technology Development Center), considering software solutions
+adopted, the impact of it on research currently carried on at the same laboratory
+and the future possible applications of the system. A special attention is given to
+the distributed file-system, a fundamental feature to allow high-performance in a system
+with many physical disk storage units and to the monitoring system. The latter being
+the 'eyes' of the users into the system's load and performance. All solutions adopted for the
+cluster are based on open or free software and almost the totality of the research
+software used is also open or free. Definitely the path towards less expensive
+research, a theme of special interest for scientists and researches from developing countries.
 \end{abstract_full_paper}
 
 %--------------------------------------------------------------------------------------
 \section{INTRODUCTION}\label{int}
+
+{\Huge Cheio de partes do outro paper!}\\
+{\Huge Conferir com cuidado!}\\
 
 %Nowadays computers are indispensable tools for scientists of any field.
 %Some areas of research heavily rely on computational power in order to solve
@@ -261,36 +268,6 @@ They are not currently in use in the describe cluster system, but are presented 
 or complementary options for specific cases. For example, the use of a software which is incompatible with another one already
 in use.
 
-%------------------------------------------------------------------------------
-\subsubsection{Docker}
-\label{ssub:dock}
-
-Docker is a software technology providing containers. A container can be seen as an isolated user space provided by the operating system
-kernel. Docker technology works providing an additional level of abstraction and automation at operating system level. In other words,
-docker provides a way of programs run without direct communication with the operating system. This makes programs unaware of details of the
-system and less dependent on specific configurations of the operating system. Docker provides the middle-ware which controls the interaction
-between programs and operating system.
-
-Moreover, Docker allows applications to be efficiently distributed and executed in a portable manner. The same application can be easily
-run in a wide range of computer platforms\cite{Boettiger}.
-
-From the point of view of program developers, distribute their application as a Docker package avoids software installation and
-setup procedures in the host machine. The toolchain complexity is performed only once in the Docker package. The system administrators,
-on the other hand, only have to install Docker and its packages. No extra work to make applications run. A valuable and detailed evaluation
-of the use of Docker in the high demand computational field of research of bioinformatics is presented by Tommaso et al.\cite{Tommaso}.
-
-%------------------------------------------------------------------------------
-\subsubsection{Operating System Virtualization}
-\label{ssub:virt}
-
-Virtualization is the creation and use of a version of (usually) an operating system inside another operating system. Virtualization
-is a technique widely used for cloud computing, where users send their jobs to be running in non-local computers usually provided
-as services. Virtualization makes possible to have many different machines installed following the needs of the users without the
-problem of machines management. The main drawback of its use is that virtualization is costly in terms of performance, since operating system
-resources that otherwise would be shared by many processes must be kept individually for each virtual machine.
-
-There are solid studies on the use of virtualization as service for scientific research\cite{vir1,vir2}. In the present case, virtualization
-is seen as a last resource for running essential software in the cases where the usual operating system or Docker do not work.
 
 %------------------------------------------------------------------------------
 \subsection{File System}
@@ -298,115 +275,22 @@ is seen as a last resource for running essential software in the cases where the
 A crucial element of a computer system architecture is its file system. A file system is the set of data structures and functions an operating system
 use to manage and keep track of files on disks and partitions. There is a large number of file systems being used by different operating systems\cite{linuxbook}.
 
-However, in a high performance and high demand system like a cluster, there are some desirable features not usually provided for standard computers file systems.
-For example, the ability to have many different interconnected computers reading and writing information concurrently and asynchronously. These kind of feature
-is provided by a specialized file system, usually called distributed file system\cite{hal}.
-
-The chosen solution for distributed file system management is the GlusterFS\cite{gluster}. GlusterFS is an open source, distributed file system and has
-a unique no-metadata server architecture. Most distributed file systems use a metadata server, which has information on where to retrieve data which is
-physically scattered among different disks. This architecture imposes a dependence on the metadata server. If it goes down, the system becomes inaccessible.
-GlusterFS keeps this information as distributed hashes, avoiding the dependence on one server or node.
-
-The control of Gluster is transparent for users, providing a level of abstraction with no impact on how users of the system operate with their files. This
-abstraction also has no impact in system management. An envisaged quota control of user accounts can work without any problem above the GlusterFS file system.
-
-Another option under consideration is the more robust Lustre file system\cite{lustre}. Lustre is a parallel distributed file system widely used in large-scale
-cluster systems. Despite its reliability and recognized performance (high I/O throughput: more than a terabyte per second), it is not the first choice
-for the distributed file system for the presented cluster due to its higher learning curve for installation and administration compared to GlusterFS.
-It is important to keep in mind that as the cluster management personal is limited and formed by non-experienced system
-administrators thus simpler systems are favored as long as they meet the operating criteria. The size of the presented cluster is also small by Lustre standards.
-
-With that in mind, Lustre remains as a second option in the case of GlusterFS does not perform as expected. 
-
 %------------------------------------------------------------------------------
-\subsection{Visualization}
+\subsubsection{Gluster File System}
 
-The presence of powerful GPU devices in each node of the cluster make possible their use for calculations. However,
-this hardware can be used for its natural task: visualization. At a first glance, this can sound natural and
-straightforward. However, there are trick details in using different nodes to render and output one image. The first one
-is the ability to gather scattered information in order to produce the desirable output in one display.
+GlusterFS\cite{gluster} is an open source, distributed file system and has
+a unique no-metadata server architecture. This is the chosen solution for the system due to its relatively
+small number os physical disks and nodes (nine).
 
-Gladly, there is software aimed to data visualization which address the presented issue. Developed to be able to work with complex data,
-Paraview\cite{paraview} is an open-source multiple-platform application for scientific visualization. Its design considers
-the use of a client-server architecture in order to deal with data-sets scattered among many nodes in a multiprocessing
-system. 
+The system is configured to use two gluster volumes, namely \texttt{gv-apps} and \texttt{gv-data}. Both volumes
+are configured as \textit{distributed} without replication. Since the whole system has an extra NAS device, there is
+no need of keeping redundant data. The \texttt{gv-data} offers $N$ Gb of storage per user and is used to run simulations or any task that needs storage during execution. After that, data must be moved to a storage space on NAS where an automatized regular backup
+avoids data loss.
 
-
-%------------------------------------------------------------------------------
-\subsection{Graphics Processors: Extended Use}
-
-The system under consideration has powerful GPU cards installed in machines
-which have no output display. The use of GPUs to perform tasks other than graphics processing
-is nowadays widespread in many fields of research \cite{gpgpu}. Modern software is written with
-the objective of taking advantage of this ``extra'' processing capabilities and studies of software
-engineering on parallelization of sequential algorithms to be applied in GPUs are a significant
-nowadays.
-
-In order to make the use of GPUs for general processing less difficult, libraries, compilers and
-frameworks were developed. At the beginning these tools were developed and deployed by graphics cards
-manufacturers. The pioneer in offering both GPUs cards capable of general use is Nvidia, which,
-without surprise, is also pioneer in making a available a full framework for its GPU programming.
-This tool is called CUDA (Compute Unified Device Architecture) and is the standard parallel computing platform
-and application programming interface (API) model for Nvidia's graphic cards.
-
-CUDA can be used together with many libraries for a wide range of programming tasks. Nvidia provides CUDA
-auxiliary libraries for, for example, linear solvers (AmgX), deep neural networks (cuDNN), Fast Fourier Transform (cuFFT) and
-many others. 
-
-However, with the increase of the use the cards, developers start to demand some
-standardization in order to be able experiment new algorithms in different cards. Today, the
-reference framework for development for heterogeneous platforms is \textit{OpenCL}\cite{opencl}.
-
-OpenCL\texttrademark (Open Computing Language) is an industry standard for task-parallel and
-data-parallel heterogeneous computing. It is designed to work on a variety of modern
-CPUs, GPUs, DSPs and other microprocessor designs. OpenCL provides a abstractions and a
-programming API (Application Programming Interface) and defines a core functionality that all
-devices must support, as well as optional functionality for high-function devices. It also
-includes an extension mechanism that let vendors implement unique hardware features and
-experimental programming interfaces for their devices and for the application developers
-benefit. OpenCL does guarantee compatibility and portability at the expense of some less
-of performance when compared to proprietary implementations.
-
-The idea for the presented cluster system, is to provide both CUDA libraries for
-software developed for Nvidia graphic cards and also OpenCL libraries to
-be used by software written to make use of the programming genericity
-provided by OpenCL. As the time of writing, the libraries were installed
-in only one node of the cluster and tests are being envisaged to check
-compatibility of both frameworks.
 
 %------------------------------------------------------------------------------
 
 \section{RESULTS AND ANALYSIS}
-
-All the results presented in this section include the master node and only one slave node.
-Since all slaves have identical hardware, it is sufficient to install and configure only one
-node and after finishing, replicate a mirror of its configuration to other nodes\footnote{Few configurations like
-  network IPs must be unique and thus configured after mirroring. However, this kind of task is simple enough to worth the mirroring approach.}
-The current status of the system is that it is partially operational with some goals reached:
-
-\begin{itemize}
-
-\item Distributed file system GlusterFS up and running;
-\item Master node installed and running with local packages repository up and running;
-\item NVidia GPU drivers installed in the master node replacing the generic drivers provided by CentOS.
-  
-\end{itemize}
-
-The short list above encompasses the very main steps to have the system running. All the next
-steps can be seen as applications installation and fine tuning of the system configuration.
-Some of the following steps are:
-
-\begin{itemize}
-\item Check the compatibility of Nvidia proprietary drivers already for the accelerators in the slave node with OpenCL implementation driver for the GPU;
-\item Chose and install a reliable backup system for user accounts and define procedures for system configuration backup;
-\item Define and install a user queue manager to control user precedence and access to nodes;
-\item Install and test all scientific software to be used in the beginning of cluster operations.
-\end{itemize}
-
-In order to be able to verify the operation of the cluster, a list of elements of operation is under consideration.
-This list is aimed to be a guide of what aspects are being complied with or not. The main idea is to have a score for
-each operational aspect related to the system design (file system, user processes, disk occupancy, etc.) and after three, six and twelve months of full operation, be able to evaluate if the system is currently
-operating satisfactorily.
 
 %------------------------------------------------------------------------------
 
@@ -451,8 +335,7 @@ uncritically on a daily basis.
 The authors would like to thank FUJB for financing the cluster acquisition
 as part of the project \textit{Desenvolvimento de novos elementos combust\'{i}veis nucleares
   e materiais e pe\c{c}as para combust\'{i}veis nucleares}, agreement FINEP 01.07.0548.00 - Process FUJB 13.867-3.
-The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos for the work which made possible the acquisition
-of the cluster.
+The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for the work which made possible the acquisition of the cluster.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
