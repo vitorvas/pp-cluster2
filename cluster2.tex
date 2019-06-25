@@ -71,55 +71,17 @@ research, a theme of special interest for scientists and researches from develop
 {\Huge Cheio de partes do outro paper!}\\
 {\Huge Conferir com cuidado!}\\
 
-%Nowadays computers are indispensable tools for scientists of any field.
-%Some areas of research heavily rely on computational power in order to solve
-%complex problems by use of demanding algorithms, methods and heuristics.
-%Current methods used for nuclear reactor calculations, both thermal-hydraulics
-%and neutronics can be more accurate or even only applicable by using
-%many cores or computers altogether.
-
-%A computer cluster consists of set of computers connected to work together. The difference of the
-%definition between a computer cluster and a computer grid is that usually grids are more
-%heterogeneous and used to a different set of problems at the same time, while a computer
-%cluster is aimed to have each node solving the same problem.
-
-%To be able to have sets of computers working together and be able to control the utilization of the system,
-%it is absolutely fundamental to have an operating system capable of offering interconnection, data sharing,
-%task schedule and user administration. The \textbf{de facto} operating system widely used in these situations
-%is Linux\cite{linux}. After choosing a suitable operating system, its mandatory to evaluate the applications to
-%be used, the level of security to be enforced and, fundamentally, the dynamics of the operation of the system.
-%These factors will define the suitable solutions for different aspects of the system, ranging from data
-%sharing among nodes to options to update, backup and access the system.
 
 
 %--------------------------------------------------------------------------------------
 \subsection{Context}
 
-%As aforementioned, the cluster presented in this paper is aimed to scientific computing.
-%Since the expression scientific computing has many meanings, depending on the context, a
-%clarification is necessary. This cluster will be utilized to run computational fluid dynamics
-%(CFD) simulations, neutronics simulations - both using deterministic and Monte Carlo methods
-%and coupled calculations, involving the two disciplines. It is also natural to predict
-%its expansion in utilization to other fields depending on its demand, performance and availability.
-
-%The users of the system are mainly nuclear and mechanic engineers, scientists and graduate
-%and undergraduate students. These users have different levels of knowledge of the work
-%they must carry and also are unevenly skilled as system users. These differences must be taken
-%in account when planning and choosing the operational characteristics of the system.
-
-%From the perspective of the Centro de Desenvolvimento da Tecnologia Nuclear (CDTN), such system
-%is a fundamental asset. Computer power is, at the very end, power of calculation and any research
-%team with demand for intensive computing is a potential user and potential client of the cluster.
-%With this in mind, there is a real potential of increase of research of CDTN related to
-%scientific computing. An interesting perspective of the way of research can change with the
-%use of intensive scientific computing - in this case, the extreme computing - is elegantly
-%presented by Dongarra\cite{Dongarra2017}.
 
 %------------------------------------------------------------------------------
 \section{OBJECTIVE}
 
 The objective of this work is to present the current status of the cluster equipament 
-at the Laboratory of Thermal-hydraulics and Neutronics of CDTN, describing the decisions 
+at the Laboratory of Thermal-hydraulics and Neutronics of CDTN (\textbf{LTHN}), describing the decisions 
 taken during the installation process, the solutions applied to common (and uncommon) problems 
 derived from running a professional cluster system. Together with technical decisions, the 
 performance of the system is asserted by comparison to the older system used by the laboratory 
@@ -170,9 +132,6 @@ a temperatura durante uma simulação Monte Carlo com o MCNP.
 %------------------------------------------------------------------------------
 \subsection{Hardware}
 
-The so-called cluster system is formed by a set of identical high performance computers -
-total number of eight machines - plus a master unit with slightly different configuration.
-Figure~\ref{fig:cluster} presents a schematic representation of the system.
 
 \begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
   \centering\includegraphics[scale=0.7]{images/cluster-topologico.png}
@@ -180,63 +139,67 @@ Figure~\ref{fig:cluster} presents a schematic representation of the system.
   \label{fig:cluster}
 \end{figure}
 
-The \textit{slave} machines are Dell workstations Precision R7910. These machines are equipped
+The \textit{slaves} are Dell workstations Precision R7910 equipped
 with Dual Intel{\textregistered} Xeon{\textregistered} processors E5-2640 operating at $2.4$GHz with
-$32$Gb of RAM each. They have 2x$10$GbE (Gigabit Ethernet) and 2x$1$Gbit network connectors, which
-allow the use of the Gigabit network exclusively for intra-cluster communication. Each node
-has a $360$Gb solid state disk for storage.
+$32$Gb of RAM each. They have two $10$GbE (Gigabit Ethernet) and also two $1$Gbit network connectors, which
+allow the use of the Gigabit network exclusively for intra-cluster communication. Their disks are $360$Gb SSD
+and are used to store the Operating System of each node and also part of the \textit{Gluster} distributed
+file system. These equipments are also installed with Nvidia{\textregistered} GPUs (Graphic Processing Units) M4000{\textregistered} with $8$Gb CUDA\cite{CUDA} capable.
 
-These equipments are also installed with Nvidia{\textregistered} GPUs (Graphic Processing Units) M4000{\textregistered} with $8$Gb CUDA\cite{CUDA} capable.
-The GPUs on nodes, despite capable of visualization, are expected to be used as secondary calculation units.
-The use of graphic processors for calculations is widely applied in scientific computing and these divides
-are also called accelerators\cite{accelerators}.
+The GPUs on nodes are used as calculation units by the software which can take advantage of this kind of hardware.
+It is worth mentioning the increase on the use of GPUs - commonly called accelerators - in scientific computing
+in the recent years\cite{accelerators}.
 
-The \textit{master} machine is a Dell Precision T7910, with very similar configuration of the slaves. The main
-differences rely on the graphics processor unit, equipped with another Nvidia{\textregistered} GPU: a
-Quadro{\textregistered} M2000 with $4$Gb of memory. These video card is not aimed for calculations, but for
-visualization of data and graphics display. The other different is in the main RAM memory, having the \textit{master}
-$256$Gb of RAM. 
+The \textit{master} node is a Dell Precision T7910. The main
+differences between the \textit{master} node and the \textit{slaves} machines are two: the \textit{master} has
+a slightly worst graphics card, a Quadro{\textregistered} M2000 with $4$Gb of memory. However, the second difference
+is the ammount of RAM memory. The nodes are equipped with $32$Gb of memory whereas the \textit{master} has
+$256$Gb of RAM.
 
-A set of three hard-disks of $500$Gb was installed to the master node, making an extra $1.5$Tb to be used as part
-of the distributed file system.
+The master node also have three hard-disks of $500$Gb used as part of the distributed file system, offering
+an extra $1.5$Tb of storage for the system as a whole.
 
-The original OS sold with the cluster is an OEM (Original Equipment Manufacturer) Windows 7{\textregistered}\cite{windows7}. This
-OS is not supported by the whole set of software expected to be used by the research group users. The chosen
-system to replace the original Windows 7 is CentOS (Community Enterprise Operating System)\cite{centos}, which offers a platform to natively run all
-software needed by the users. CentOS is a community driven free-software effort which focuses in provide a robust open source ecosystem.
-Its typical users are organizations or individuals which have professional oriented hardware but do not need strong commercial support
-in order to achieve successful operation. It is fully compatible with Red Hat Enterprise Linux and in full compliance with Red Hat's
-redistribution requirements.
 
-Details on possible options for software compatibility and operating system independence will be given on subsections \ref{ssub:dock} and \ref{ssub:virt}
+
+%--------------------------------------------------------%
+%The original OS sold with the cluster is an OEM (Original Equipment Manufacturer) Windows 7{\textregistered}\cite{windows7}. This
+%OS is not supported by the whole set of software expected to be used by the research group users. The chosen
+%system to replace the original Windows 7 is CentOS (Community Enterprise Operating System)\cite{centos}, which offers a platform to natively run all
+%software needed by the users. CentOS is a community driven free-software effort which focuses in provide a robust open source ecosystem.
+%Its typical users are organizations or individuals which have professional oriented hardware but do not need strong commercial support
+%in order to achieve successful operation. It is fully compatible with Red Hat Enterprise Linux and in full compliance with Red Hat's
+%redistribution requirements.
+
+%Details on possible options for software compatibility and operating system independence will be given on subsections \ref{ssub:dock} and \ref{ssub:virt}
 
 %------------------------------------------------------------------------------
 \subsection{Linux Operating System}
 
-The reason for choosing \textit{CentOS} as the Linux flavor for the system is due to its characteristics and the previous
-experience of the cluster management team. CentOS is aimed to offer a free, enterprise-class, community-supported computing
-functionality. It appeared as a fork of Red Hat Enterprise Linux, which is available only trough paid subscription. The option
-for CentOS, in this context, is to have both the strong development for enterprise systems and also its gratuity.
+%The reason for choosing \textit{CentOS} as the Linux flavor for the system is due to its characteristics and the previous
+%experience of the cluster management team. CentOS is aimed to offer a free, enterprise-class, community-supported computing
+%functionality. It appeared as a fork of Red Hat Enterprise Linux, which is available only trough paid subscription. The option
+%for CentOS, in this context, is to have both the strong development for enterprise systems and also its gratuity.
 
-A second reason is to take advantage of previous competence of the installation and user team which already has experience
-in using Fedora Linux, a distribution fully compatible with CentOS.
+%A second reason is to take advantage of previous competence of the installation and user team which already has experience
+%in using Fedora Linux, a distribution fully compatible with CentOS.
 
-That said, all the software currently in use by the Thermal-Hydraulics Laboratory team are compatible with CentOS. This
-makes this flavor of Linux the straightforward choice for the cluster system. It is also worth noting that the use of
-free and open-source software has a social meaning in promoting the share of knowledge.
+%That said, all the software currently in use by the Thermal-Hydraulics Laboratory team are compatible with CentOS. This
+%makes this flavor of Linux the straightforward choice for the cluster system. It is also worth noting that the use of
+%free and open-source software has a social meaning in promoting the share of knowledge.
 
 %------------------------------------------------------------------------------
 \subsection{Software Solutions}
 \label{sub:ssol}
 
-Before choosing a software for perform a desirable task, its mandatory to have a consistent definition of the environment
-in which the system will be used. The first constraint is the network environment. It's worth noting that the cluster is
-located in the CDTN network and the restrictions and security rules enforced in the network must be followed by the system.
 
-With this is mind, the choice is to have the main system - interchangeably called slave machines or cluster nodes - in one isolated sub-network only accessed by
-the master node. The master node is part of both the sub-network and the institute's network. The sole point of access to the
-internet for any slave is the master node which, in turn, is connected to the internet using a proxy connection and a
-NAT (Network Access Translation). The topology of the cluster network is presented in Figure~\ref{fig:esquema-cluster}.
+%Before choosing a software for perform a desirable task, its mandatory to have a consistent definition of the environment
+%in which the system will be used. The first constraint is the network environment. It's worth noting that the cluster is
+%located in the CDTN network and the restrictions and security rules enforced in the network must be followed by the system.
+
+%With this is mind, the choice is to have the main system - interchangeably called slave machines or cluster nodes - in one isolated sub-network only accessed by
+%the master node. The master node is part of both the sub-network and the institute's network. The sole point of access to the
+%internet for any slave is the master node which, in turn, is connected to the internet using a proxy connection and a
+%NAT (Network Access Translation). The topology of the cluster network is presented in Figure~\ref{fig:esquema-cluster}.
 
 \begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
 %  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
@@ -245,35 +208,35 @@ NAT (Network Access Translation). The topology of the cluster network is present
   \label{fig:esquema-cluster}
 \end{figure}
 
-The chosen network topology have impacts on system maintenance. Since the slave machines cannot access the internet, the
-master is configured to hold a mirror of packages installed in all system machines. The average download rate for main CentOS package provider site at the
-master node is of $500$Kbytes/second in trough the proxy in CDTN's network.
-With this in mind, the master machine is scheduled to make updates from time to time (once a week in the current configuration) while the slaves are also scheduled to
-make their updates after the master and from master's local repository. This approach has advantages, like decreasing internet bandwidth demand since only
-one machine downloads updated packages from the internet. Other advantage is in downloading time, since the slaves
-use dedicated $10$GbE connections to the master which provides the necessary packages.
+%The chosen network topology have impacts on system maintenance. Since the slave machines cannot access the internet, the
+%master is configured to hold a mirror of packages installed in all system machines. The average download rate for main CentOS package provider site at the
+%master node is of $500$Kbytes/second in trough the proxy in CDTN's network.
+%With this in mind, the master machine is scheduled to make updates from time to time (once a week in the current configuration) while the slaves are also scheduled to
+%make their updates after the master and from master's local repository. This approach has advantages, like decreasing internet bandwidth demand since only
+%one machine downloads updated packages from the internet. Other advantage is in downloading time, since the slaves
+%use dedicated $10$GbE connections to the master which provides the necessary packages.
 
-As expected, this approach has its drawback. A certain amount of disk space is needed to keep a mirror of CentOS packages locally.
-To decrease this space consumption, only packages already installed on the system - master and slaves - are
-downloaded and kept in the local repository. In the case of the installation of a new package not yet present in the repository,
-it must be installed in the master. After that, the scheduled script guarantees its availability for the slaves. In the uncommon
-situation where a package is necessary for the nodes but not for the master, it must be manually added to the repository. This task
-is facilitated by CentOS packages manager \verb yum \cite{yum}
+%As expected, this approach has its drawback. A certain amount of disk space is needed to keep a mirror of CentOS packages locally.
+%To decrease this space consumption, only packages already installed on the system - master and slaves - are
+%downloaded and kept in the local repository. In the case of the installation of a new package not yet present in the repository,
+%it must be installed in the master. After that, the scheduled script guarantees its availability for the slaves. In the uncommon
+%situation where a package is necessary for the nodes but not for the master, it must be manually added to the repository. This task
+%is facilitated by CentOS packages manager \verb yum \cite{yum}
 
-However, there are more than one way of setup a cluster system with respect
-to file system, software execution and user access.
+%However, there are more than one way of setup a cluster system with respect
+%to file system, software execution and user access.
 
-The next sub-sections describe alternatives to the use of a direct installation of CentOS version of Linux operating system.
-They are not currently in use in the describe cluster system, but are presented in this paper as they remain as alternatives
-or complementary options for specific cases. For example, the use of a software which is incompatible with another one already
-in use.
+%The next sub-sections describe alternatives to the use of a direct installation of CentOS version of Linux operating system.
+%They are not currently in use in the describe cluster system, but are presented in this paper as they remain as alternatives
+%or complementary options for specific cases. For example, the use of a software which is incompatible with another one already
+%in use.
 
 
 %------------------------------------------------------------------------------
 \subsection{File System}
 
-A crucial element of a computer system architecture is its file system. A file system is the set of data structures and functions an operating system
-use to manage and keep track of files on disks and partitions. There is a large number of file systems being used by different operating systems\cite{linuxbook}.
+During the installation phase of the cluster system\cite{cluster17} were two the contenders for
+distributed filesystem solution. The chosen one is described below.
 
 %------------------------------------------------------------------------------
 \subsubsection{Gluster File System}
@@ -284,8 +247,7 @@ small number os physical disks and nodes (nine).
 
 The system is configured to use two gluster volumes, namely \texttt{gv-apps} and \texttt{gv-data}. Both volumes
 are configured as \textit{distributed} without replication. Since the whole system has an extra NAS device, there is
-no need of keeping redundant data. The \texttt{gv-data} offers $N$ Gb of storage per user and is used to run simulations or any task that needs storage during execution. After that, data must be moved to a storage space on NAS where an automatized regular backup
-avoids data loss.
+no need of keeping redundant data. The \texttt{gv-data} offers $N$ Gb of storage per user and is used to run simulations or any task that needs storage during execution. After that, data must be moved to a storage space on NAS where an automatized regular backup avoids data loss.
 
 
 %------------------------------------------------------------------------------
@@ -299,29 +261,29 @@ avoids data loss.
 %(O que está bom, o que está ruim na atual instalação)
 %(Trabalhos futuros: pra onde ir (operação), possíveis mudanças)
 
-The process of acquiring, installing and managing a cluster system is a very specific task aimed to well trained
-personal. In a perfect situation, a team of specialists would take care of these tasks letting the users - scientists in the present case -
-free to focus on their research work and on how to take the most of such system. However, in other cases the users themselves must
-take care of the whole process.
+%The process of acquiring, installing and managing a cluster system is a very specific task aimed to well trained
+%personal. In a perfect situation, a team of specialists would take care of these tasks letting the users - scientists in the present case -
+%free to focus on their research work and on how to take the most of such system. However, in other cases the users themselves must
+%take care of the whole process.
 
-Although challenging, this can be seen as an opportunity to have a deeper of understanding of the tool one must use the accomplish his tasks.
-This the case in this work, where the users had to chose among many options to make a professional cluster operational.
+%Although challenging, this can be seen as an opportunity to have a deeper of understanding of the tool one must use the accomplish his tasks.
+%This the case in this work, where the users had to chose among many options to make a professional cluster operational.
 
-As an ongoing work, some of the challenges - like defining and installing a distributed file system, for example - were successfully
-addressed. Other remain to be figured out and worked out.
+%As an ongoing work, some of the challenges - like defining and installing a distributed file system, for example - were successfully
+%addressed. Other remain to be figured out and worked out.
 
-There are many ongoing tasks and even more tasks still to be started. To mention a few, one
-interesting task related to the reliability and data management is the implementation of
-a automatic process of shutdown on loss of power supply. Other one is to define a systematic
-user account backup to avoid loss of data of expensive simulations at the same time ensuring
-disk space availability.
+%There are many ongoing tasks and even more tasks still to be started. To mention a few, one
+%interesting task related to the reliability and data management is the implementation of
+%a automatic process of shutdown on loss of power supply. Other one is to define a systematic
+%user account backup to avoid loss of data of expensive simulations at the same time ensuring
+%disk space availability.
 
-As a conclusion, there is a clear trade-off between the situation where the tool - at the limit, a complex tool like a cluster is a tool - is available and ready to use and
-the discussed case in this paper. The former clearly saves precious time that scientists can devote to their research work itself. However, the latter situation has a not so obvious
-advantage: being forced to expend time to understand details of the cluster operation, scientists can acquire a new perspective on how to apply their
-methods. This can lead to changes or improvements in the way a problem is solved. If this is a real advantage is yet to be shown. However,
-in a situation like the one presented, where there is no choice, this can be seen as a positive condition on the improvement of methods, solutions and approaches used
-uncritically on a daily basis.
+%As a conclusion, there is a clear trade-off between the situation where the tool - at the limit, a complex tool like a cluster is a tool - is available and ready to use and
+%the discussed case in this paper. The former clearly saves precious time that scientists can devote to their research work itself. However, the latter situation has a not so obvious
+%advantage: being forced to expend time to understand details of the cluster operation, scientists can acquire a new perspective on how to apply their
+%methods. This can lead to changes or improvements in the way a problem is solved. If this is a real advantage is yet to be shown. However,
+%in a situation like the one presented, where there is no choice, this can be seen as a positive condition on the improvement of methods, solutions and approaches used
+%uncritically on a daily basis.
 
 
 %Uma cita\c{c}\~{a}o \cite{Henderson17}.
@@ -349,7 +311,7 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
 
 \bibitem{accelerators} ``What is GPU-accelerated computing?'', \\\verb#http://www.nvidia.com/object/what-is-gpu-computing.html# (2017).
 
-\bibitem{windows7} Jorge Orchilles, \textit{Microsoft Windows 7 Administrator's Reference}, Syngress, Boston USA (2010).
+%\bibitem{windows7} Jorge Orchilles, \textit{Microsoft Windows 7 Administrator's Reference}, Syngress, Boston USA (2010).
   
   % Centos
 \bibitem{centos} ``The CentOS Project'', \verb#https://www.centos.org# (2017).
@@ -371,13 +333,16 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
   
 \bibitem{gluster} Alex Davies and Alessandro Orsaria, ``Scale out with GlusterFS'', \textit{The Linux Journal}, \textbf{2013}, (2013).
 
-\bibitem{lustre} ``Lustre* Software Release 2.x: Operations Manual'', Editor: Intel Corporation, (2017).
+%\bibitem{lustre} ``Lustre* Software Release 2.x: Operations Manual'', Editor: Intel Corporation, (2017).
 
 \bibitem{paraview} Ayachit, Utkarsh, \textit{The ParaView Guide: A Parallel Visualization Application}, Kitware, ISBN 978-1930934306, (2015).
 
-  \bibitem{gpgpu}  John D. Owens, David Luebke, Naga Govindaraju, Mark Harris, Jens Kr\"{u}ger, Aaron E. Lefohn, and Tim Purcell, ``A Survey of General-Purpose Computation on Graphics Hardware'', \textit{Computer Graphics Forum}, \textbf{26(1)}, pp. 80--113, March (2007).
+\bibitem{gpgpu}  John D. Owens, David Luebke, Naga Govindaraju, Mark Harris, Jens Kr\"{u}ger, Aaron E. Lefohn, and Tim Purcell, ``A Survey of General-Purpose Computation on Graphics Hardware'', \textit{Computer Graphics Forum}, \textbf{26(1)}, pp. 80--113, March (2007).
 
-  \bibitem{opencl} J. E. Stone, D. Gohara and G. Shi, ``OpenCL: A Parallel Programming Standard for Heterogeneous Computing Systems'', \textit{Computing in Science \& Engineering}, \textbf{12(3)}, pp. 66--73, May-June (2010).
+\bibitem{opencl} J. E. Stone, D. Gohara and G. Shi, ``OpenCL: A Parallel Programming Standard for Heterogeneous Computing Systems'', \textit{Computing in Science \& Engineering}, \textbf{12(3)}, pp. 66--73, May-June (2010).
+
+\bibitem{cluster17} Vitor V. A. Silva, André A. C. dos Santos and Renan O. Cunha, ``Professional Cluster Management
+    by a small scientific team: challenges, solutions and perspectives'', \textit{XX ENFIR INAC 2017 International Nuclear Atlantic Conference }, Belo Horizonte, MG, Brazil, pp. xx-yy, October, (2017). 
 
 \end{thebibliography}
 
