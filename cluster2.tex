@@ -1,6 +1,6 @@
 \documentclass[twoside,a4paper,12pt,english]{inac19}
 
-%INAC2017 SETUP: SET PAGE SIZE AND SET FOR USING graphicx PACKAGE.
+%INAC2019 SETUP: SET PAGE SIZE AND SET FOR USING graphicx PACKAGE.
 \usepackage{graphicx}
 \usepackage{babel,varioref,epsfig} %,rotating}
 \usepackage{amssymb}
@@ -12,7 +12,7 @@
 %\title{MANAGING AND USING A PROFESSIONAL CLUSTER IN NUCLEAR ENGINEERING APPLICATIONS}
 \title{THE LTHN COMPUTER CLUSTER}
 
-%INAC2017 SETUP: SPECIFY AUTHOR NAMES, AFFILIATION, ADDRESS AND E-MAIL.
+%INAC2019 SETUP: SPECIFY AUTHOR NAMES, AFFILIATION, ADDRESS AND E-MAIL.
 
 \author{
   \bf{Vitor Vasconcelos, Andr\'e dos Santos,}\\
@@ -26,7 +26,7 @@
 }
 \begin{document}
 
-%INAC2017 SETUP: PRINT TITLE
+%INAC2019 SETUP: PRINT TITLE
 \maketitle
 
 % Acrescentado para facilitar a redação da NI associada
@@ -34,13 +34,13 @@
 %\tableofcontents
 
 
-%INAC2017 SETUP: SETUP HEADS FOR PAGES
+%INAC2019 SETUP: SETUP HEADS FOR PAGES
 \pagestyle{myheadings}
 \thispagestyle{empty}
 \markboth{}{}
 
 
-%INAC2017 SETUP: SET FIRST PAGE WITH NO PAGE NUMBER
+%INAC2019 SETUP: SET FIRST PAGE WITH NO PAGE NUMBER
 \thispagestyle{empty}
 
 %--------------------------------------------------------------------------------------
@@ -147,8 +147,11 @@ and are used to store the Operating System of each node and also part of the \te
 file system. These equipments are also installed with Nvidia{\textregistered} GPUs (Graphic Processing Units) M4000{\textregistered} with $8$Gb CUDA\cite{CUDA} capable.
 
 The GPUs on nodes are used as calculation units by the software which can take advantage of this kind of hardware.
-It is worth mentioning the increase on the use of GPUs - commonly called accelerators - in scientific computing
-in the recent years\cite{accelerators}.
+The use of hardware acceleration in scientific computing is not new and have been increasing consistently on the
+last years\cite{accelerators}.
+
+%It is worth mentioning the increase on the use of GPUs - commonly called accelerators - in scientific computing
+%in the recent years\cite{accelerators}.
 
 The \textit{master} node is a Dell Precision T7910. The main
 differences between the \textit{master} node and the \textit{slaves} machines are two: the \textit{master} has
@@ -235,7 +238,7 @@ an extra $1.5$Tb of storage for the system as a whole.
 %------------------------------------------------------------------------------
 \subsection{File System}
 
-During the installation phase of the cluster system\cite{cluster17} were two the contenders for
+During the installation phase of the cluster system\cite{cluster17} there were two the contenders for
 distributed filesystem solution. The chosen one is described below.
 
 %------------------------------------------------------------------------------
@@ -249,6 +252,17 @@ The system is configured to use two gluster volumes, namely \texttt{gv-apps} and
 are configured as \textit{distributed} without replication. Since the whole system has an extra NAS device, there is
 no need of keeping redundant data. The \texttt{gv-data} offers $N$ Gb of storage per user and is used to run simulations or any task that needs storage during execution. After that, data must be moved to a storage space on NAS where an automatized regular backup avoids data loss.
 
+%------------------------------------------------------------------------------
+\subsubsection{Using}
+\label{ssec:slurm}
+
+Jobs: Tenho que explicar o Slurm\cite{slurm} e cita-lo.
+
+%------------------------------------------------------------------------------
+\subsubsection{Monitoring}
+\label{ssec:ganglia}
+
+http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apache\cite{apache}.
 
 %------------------------------------------------------------------------------
 
@@ -258,33 +272,9 @@ no need of keeping redundant data. The \texttt{gv-data} offers $N$ Gb of storage
 
 \section{CONCLUSIONS AND PERSPECTIVES}
 
-%(O que está bom, o que está ruim na atual instalação)
-%(Trabalhos futuros: pra onde ir (operação), possíveis mudanças)
-
-%The process of acquiring, installing and managing a cluster system is a very specific task aimed to well trained
-%personal. In a perfect situation, a team of specialists would take care of these tasks letting the users - scientists in the present case -
-%free to focus on their research work and on how to take the most of such system. However, in other cases the users themselves must
-%take care of the whole process.
-
-%Although challenging, this can be seen as an opportunity to have a deeper of understanding of the tool one must use the accomplish his tasks.
-%This the case in this work, where the users had to chose among many options to make a professional cluster operational.
-
-%As an ongoing work, some of the challenges - like defining and installing a distributed file system, for example - were successfully
-%addressed. Other remain to be figured out and worked out.
-
-%There are many ongoing tasks and even more tasks still to be started. To mention a few, one
-%interesting task related to the reliability and data management is the implementation of
-%a automatic process of shutdown on loss of power supply. Other one is to define a systematic
-%user account backup to avoid loss of data of expensive simulations at the same time ensuring
-%disk space availability.
-
-%As a conclusion, there is a clear trade-off between the situation where the tool - at the limit, a complex tool like a cluster is a tool - is available and ready to use and
-%the discussed case in this paper. The former clearly saves precious time that scientists can devote to their research work itself. However, the latter situation has a not so obvious
-%advantage: being forced to expend time to understand details of the cluster operation, scientists can acquire a new perspective on how to apply their
-%methods. This can lead to changes or improvements in the way a problem is solved. If this is a real advantage is yet to be shown. However,
-%in a situation like the one presented, where there is no choice, this can be seen as a positive condition on the improvement of methods, solutions and approaches used
-%uncritically on a daily basis.
-
+(O que está bom, o que está ruim na atual instalação)
+(Trabalhos futuros: pra onde ir (operação), possíveis mudanças)
+(Olhar no plans o que falta)
 
 %Uma cita\c{c}\~{a}o \cite{Henderson17}.
 
@@ -303,13 +293,13 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
 
 \begin{thebibliography}{99} %99 é o número máximo que o thebibliography permite. Numero de referencias que aparecerão.
 
-\bibitem{linux} ``The Linux Documentation Project'', \\\verb#http://www.tldp.org/LDP/intro-linux/html/chap_01.html# (2017).
+\bibitem{linux} ``The Linux Documentation Project'', \\\verb#http://www.tldp.org/LDP/intro-linux/html/chap_01.html# (2019).
 
 \bibitem{Dongarra2017} John Dongarra et. al., ``With Extreme Computing, the Rules Have Changed'', \textit{Computing in Science Engineering}, \textbf{19}, pp. 52--62, (2017).
 
 \bibitem{CUDA} John Nickolls, Ian Buck, Michael Garland and Kevin Skadron, ``Scalable Parallel Programming with CUDA'', \textit{Queue - GPU Computing}, \textbf{6}, pp. 40--53, (2008).
 
-\bibitem{accelerators} ``What is GPU-accelerated computing?'', \\\verb#http://www.nvidia.com/object/what-is-gpu-computing.html# (2017).
+\bibitem{accelerators} David Tarditi, Sidd Puri, and Jose Oglesby, ``Accelerator: using data parallelism to program GPUs for general-purpose uses'',  \textit{SIGPLAN Not. 41}, \textbf{11}, pp. 325--335. DOI: https://doi.org/10.1145/1168918.1168898 (2006).
 
 %\bibitem{windows7} Jorge Orchilles, \textit{Microsoft Windows 7 Administrator's Reference}, Syngress, Boston USA (2010).
   
@@ -341,9 +331,15 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
 
 \bibitem{opencl} J. E. Stone, D. Gohara and G. Shi, ``OpenCL: A Parallel Programming Standard for Heterogeneous Computing Systems'', \textit{Computing in Science \& Engineering}, \textbf{12(3)}, pp. 66--73, May-June (2010).
 
-\bibitem{cluster17} Vitor V. A. Silva, André A. C. dos Santos and Renan O. Cunha, ``Professional Cluster Management
+\bibitem{cluster17} Vitor V. A. Silva, Andr\'{e} A. C. dos Santos and Renan O. Cunha, ``Professional Cluster Management
     by a small scientific team: challenges, solutions and perspectives'', \textit{XX ENFIR INAC 2017 International Nuclear Atlantic Conference }, Belo Horizonte, MG, Brazil, pp. xx-yy, October, (2017). 
 
+  \bibitem{slurm} SLURM.
+    
+  \bibitem{apache} APACHE.
+    
+  \bibitem{ganglia} GANGLIA.
+    
 \end{thebibliography}
 
 % ---------------------------------------------------------
