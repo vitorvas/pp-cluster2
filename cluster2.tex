@@ -14,16 +14,28 @@
 
 %INAC2019 SETUP: SPECIFY AUTHOR NAMES, AFFILIATION, ADDRESS AND E-MAIL.
 
-\author{
-  \bf{Vitor Vasconcelos, Andr\'e dos Santos,}\\
-  \bf{Daniel Campolina and Graiciany Barros}\\ \\
-  CDTN - Centro de Desenvolvimento da Tecnologia Nuclear\\
-  Av. Ant\^onio Carlos 6627 - Campus UFMG\\
-  31270-901 - Belo Horizonte, MG\\
-  \{vitors, aacs, campolina, graiciany.barros\}@cdtn.br}
+\author
+  {{\bfseries{\normalsize Vitor Vasconcelos A. Silva$^{1}$, Graiciany P. Barros$^{1}$}} \\
+  {\bfseries{\normalsize {Andr\'e A. C. dos Santos$^{1,2}$, Daniel A. Magalh\~aes Campolina$^{1}$}}} \\ \\
+    $^{1}$Centro de Desenvolvimento da Tecnologia Nuclear (CDTN/CNEN)\\
+    Av. Presidente Ant\^onio Carlos, 6627 \\
+    31270-901 Belo Horizonte - MG\\
+    vitors@cdtn.br, graiciany.barros@cdtn.br, aacs@cdtn.br, campolina@cdtn.br\\ \\
+    $^{2}$Departamento de Engenharia Nuclear - UFMG \\
+    Universidade Federal de Minas Gerais\\
+    Av. Presidente Ant\^onio Carlos, 6627 \\
+    31270-901 Belo Horizonte - MG\\
+    }
+%\author{
+%  \bf{Vitor Vasconcelos, Andr\'e dos Santos,}\\
+%  \bf{Daniel Campolina and Graiciany Barros}\\ \\
+%  CDTN - Centro de Desenvolvimento da Tecnologia Nuclear\\
+%  Av. Ant\^onio Carlos 6627 - Campus UFMG\\
+%  31270-901 - Belo Horizonte, MG\\
+%  \{vitors, aacs, campolina, graiciany.barros\}@cdtn.br}
 
 
-}
+
 \begin{document}
 
 %INAC2019 SETUP: PRINT TITLE
@@ -68,14 +80,24 @@ research, a theme of special interest for scientists and researches from develop
 %--------------------------------------------------------------------------------------
 \section{INTRODUCTION}\label{int}
 
-{\Huge Cheio de partes do outro paper!}\\
-{\Huge Conferir com cuidado!}\\
+This paper presents the current situation of the LTHN/CDTN (Thermal-hydraulics and Neutronics
+Laboratory/Nuclear Technology Development Center) computer cluster. This cluster is the main 
+computational tool of the research group and it is mainly used on Neutronics and Thermal-hydraulics 
+numerical simulations. In this work it is briefly described, considering hardware and software, 
+with special focus on the software solutions which allows its operation on a 24/7 basis.
 
+The current work does not focus on hardware characteristics nor network configuration since 
+a solid description of these features is provided in a former work of the team responsible 
+for the cluster operation\cite{cluster17}.
 
-
-%--------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 \subsection{Context}
 
+It is probably unnecessary to mention the importance of computers to all the work carried on 
+in the field of Science and Technology. Put shortly: the magnitude of calculations and simulations 
+achieved using computers - in this case, a special set of them - are simply impossible without 
+them and this fact makes computers integral part of scientific development. An elegant outlook 
+on this matter is given by Dongarra\cite{Dongarra2017}.
 
 %------------------------------------------------------------------------------
 \section{OBJECTIVE}
@@ -87,9 +109,11 @@ derived from running a professional cluster system. Together with technical deci
 performance of the system is asserted by comparison to the older system used by the laboratory 
 team. 
 
+
 %------------------------------------------------------------------------------
 \section{METHODS AND PROCEDURES}
 
+*************************************************************\\
 Main information to be detailed: the cluster uses hostbased authentication, GPU used via 
 vnc, \texttt{data} directory at each user account pointing to gluster, how many gluster 
 volumes (why two, how they are configured - distributed) and what each one stores, 
@@ -101,43 +125,10 @@ and on the internal structure of gluster/NAS.
 List the applications running (if possible with some benchmarks) and installed. 
 Future work, if something is still missing.
 
-%------------------------------------------------------------------------------
-\subsection{Local Structure}
-CLUSTER, NAS, NOBREAK, OTHER HARDWARE
-
-Falar da instalação do pacote lm\_sensors para permitir o controle de temperatura dos núcleos. Vale fazer um gráfico para mostrar o quanto sobe 
-a temperatura durante uma simulação Monte Carlo com o MCNP.
-
-%In order to start the operation of a cluster system, there are some considerations the must
-%be taken in account. The physical location of the system is fundamental for safe, secure and
-%reliable operation.
-
-%From the security point of view, the cluster is located at a locked room with limited access to
-%the personal related to manage and install the system. The building in which the cluster is located
-%is part of the entire institute which is fenced and guarded by armed security personal, what makes
-%unauthorized access or intrusion a minor issue.
-
-%The meaning of safety in this text is related to only to system safety. Personal
-%safety is not an issue since no special conditions are necessary to operated and use the cluster other
-%than use an ordinary desktop computer. The safety of the system consist in guarantee environmental conditions
-%which are not harmful to the hardware. In order to guarantee a proper operational temperature, two dedicated
-%air conditioning devices work in parallel. These equipments are dimensioned to be able to maintain, each one alone,
-%the working temperature at the cluster room considering the system at full operation, i.e. all nodes using all cores
-%and GPUs.
-
-%Related to reliability, the system is plugged to a remotely configurable no-break of 40KvA. This equipment
-%can provide power for the whole cluster for more than 10 minutes, time enough to be able to save the state of current jobs
-%for all users. The implementation of shutdown scripts related to no-break signals is still to be defined.
+\\************************************************************
 
 %------------------------------------------------------------------------------
 \subsection{Hardware}
-
-
-\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
-  \centering\includegraphics[scale=0.7]{images/cluster-topologico.png}
-  \caption{Cluster hardware.}
-  \label{fig:cluster}
-\end{figure}
 
 The \textit{slaves} are Dell workstations Precision R7910 equipped
 with Dual Intel{\textregistered} Xeon{\textregistered} processors E5-2640 operating at $2.4$GHz with
@@ -146,12 +137,15 @@ allow the use of the Gigabit network exclusively for intra-cluster communication
 and are used to store the Operating System of each node and also part of the \textit{Gluster} distributed
 file system. These equipments are also installed with Nvidia{\textregistered} GPUs (Graphic Processing Units) M4000{\textregistered} with $8$Gb CUDA\cite{CUDA} capable.
 
+\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
+  \centering\includegraphics[scale=0.7]{images/cluster-topologico.png}
+  \caption{Cluster hardware.}
+  \label{fig:cluster}
+\end{figure}
+
 The GPUs on nodes are used as calculation units by the software which can take advantage of this kind of hardware.
 The use of hardware acceleration in scientific computing is not new and have been increasing consistently on the
 last years\cite{accelerators}.
-
-%It is worth mentioning the increase on the use of GPUs - commonly called accelerators - in scientific computing
-%in the recent years\cite{accelerators}.
 
 The \textit{master} node is a Dell Precision T7910. The main
 differences between the \textit{master} node and the \textit{slaves} machines are two: the \textit{master} has
@@ -159,81 +153,29 @@ a slightly worst graphics card, a Quadro{\textregistered} M2000 with $4$Gb of me
 is the ammount of RAM memory. The nodes are equipped with $32$Gb of memory whereas the \textit{master} has
 $256$Gb of RAM.
 
-The master node also have three hard-disks of $500$Gb used as part of the distributed file system, offering
-an extra $1.5$Tb of storage for the system as a whole.
 
+Three hard-disks of $500$Gb are physically connect to the \textit{master} node and are used as part of the 
+\textit{Gluster} distributed file system, offering
+an extra $1.5$Tb of storage for the whole system.
 
 
 %--------------------------------------------------------%
-%The original OS sold with the cluster is an OEM (Original Equipment Manufacturer) Windows 7{\textregistered}\cite{windows7}. This
-%OS is not supported by the whole set of software expected to be used by the research group users. The chosen
-%system to replace the original Windows 7 is CentOS (Community Enterprise Operating System)\cite{centos}, which offers a platform to natively run all
-%software needed by the users. CentOS is a community driven free-software effort which focuses in provide a robust open source ecosystem.
-%Its typical users are organizations or individuals which have professional oriented hardware but do not need strong commercial support
-%in order to achieve successful operation. It is fully compatible with Red Hat Enterprise Linux and in full compliance with Red Hat's
-%redistribution requirements.
-
-%Details on possible options for software compatibility and operating system independence will be given on subsections \ref{ssub:dock} and \ref{ssub:virt}
 
 %------------------------------------------------------------------------------
-\subsection{Linux Operating System}
+\subsubsection{NAS}
 
-%The reason for choosing \textit{CentOS} as the Linux flavor for the system is due to its characteristics and the previous
-%experience of the cluster management team. CentOS is aimed to offer a free, enterprise-class, community-supported computing
-%functionality. It appeared as a fork of Red Hat Enterprise Linux, which is available only trough paid subscription. The option
-%for CentOS, in this context, is to have both the strong development for enterprise systems and also its gratuity.
-
-%A second reason is to take advantage of previous competence of the installation and user team which already has experience
-%in using Fedora Linux, a distribution fully compatible with CentOS.
-
-%That said, all the software currently in use by the Thermal-Hydraulics Laboratory team are compatible with CentOS. This
-%makes this flavor of Linux the straightforward choice for the cluster system. It is also worth noting that the use of
-%free and open-source software has a social meaning in promoting the share of knowledge.
+XXXXXXXXXXXXXXXXXXXXx
 
 %------------------------------------------------------------------------------
 \subsection{Software Solutions}
 \label{sub:ssol}
 
 
-%Before choosing a software for perform a desirable task, its mandatory to have a consistent definition of the environment
-%in which the system will be used. The first constraint is the network environment. It's worth noting that the cluster is
-%located in the CDTN network and the restrictions and security rules enforced in the network must be followed by the system.
-
-%With this is mind, the choice is to have the main system - interchangeably called slave machines or cluster nodes - in one isolated sub-network only accessed by
-%the master node. The master node is part of both the sub-network and the institute's network. The sole point of access to the
-%internet for any slave is the master node which, in turn, is connected to the internet using a proxy connection and a
-%NAT (Network Access Translation). The topology of the cluster network is presented in Figure~\ref{fig:esquema-cluster}.
-
-\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
-%  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
-  \centering\includegraphics[scale=0.7]{images/cluster-rede.png}
-  \caption{Cluster showing its network topology.}
-  \label{fig:esquema-cluster}
-\end{figure}
-
-%The chosen network topology have impacts on system maintenance. Since the slave machines cannot access the internet, the
-%master is configured to hold a mirror of packages installed in all system machines. The average download rate for main CentOS package provider site at the
-%master node is of $500$Kbytes/second in trough the proxy in CDTN's network.
-%With this in mind, the master machine is scheduled to make updates from time to time (once a week in the current configuration) while the slaves are also scheduled to
-%make their updates after the master and from master's local repository. This approach has advantages, like decreasing internet bandwidth demand since only
-%one machine downloads updated packages from the internet. Other advantage is in downloading time, since the slaves
-%use dedicated $10$GbE connections to the master which provides the necessary packages.
-
-%As expected, this approach has its drawback. A certain amount of disk space is needed to keep a mirror of CentOS packages locally.
-%To decrease this space consumption, only packages already installed on the system - master and slaves - are
-%downloaded and kept in the local repository. In the case of the installation of a new package not yet present in the repository,
-%it must be installed in the master. After that, the scheduled script guarantees its availability for the slaves. In the uncommon
-%situation where a package is necessary for the nodes but not for the master, it must be manually added to the repository. This task
-%is facilitated by CentOS packages manager \verb yum \cite{yum}
-
-%However, there are more than one way of setup a cluster system with respect
-%to file system, software execution and user access.
-
-%The next sub-sections describe alternatives to the use of a direct installation of CentOS version of Linux operating system.
-%They are not currently in use in the describe cluster system, but are presented in this paper as they remain as alternatives
-%or complementary options for specific cases. For example, the use of a software which is incompatible with another one already
-%in use.
-
+It is worth mention that among the main software solutions a simple and yet powerful package 
+allows the use of embedded temperature monitoring hardware to display system's temperature. 
+Although now only used on system administrator needs, it can be used to automate system's 
+responses in specific events. Off course, on top of the already available operational systems 
+safety measures. 
 
 %------------------------------------------------------------------------------
 \subsection{File System}
@@ -246,11 +188,22 @@ distributed filesystem solution. The chosen one is described below.
 
 GlusterFS\cite{gluster} is an open source, distributed file system and has
 a unique no-metadata server architecture. This is the chosen solution for the system due to its relatively
-small number os physical disks and nodes (nine).
+small number of physical disks and nodes (nine).
 
-The system is configured to use two gluster volumes, namely \texttt{gv-apps} and \texttt{gv-data}. Both volumes
+The system is configured to use two \textit{gluster} volumes, namely \texttt{gv-apps} and \texttt{gv-data}. Both volumes
 are configured as \textit{distributed} without replication. Since the whole system has an extra NAS device, there is
 no need of keeping redundant data. The \texttt{gv-data} offers $N$ Gb of storage per user and is used to run simulations or any task that needs storage during execution. After that, data must be moved to a storage space on NAS where an automatized regular backup avoids data loss.
+
+Figure \ref{fig:cluster-gluster} shows the "software" view of \textit{gluster} by the system's operational system. The big 
+gluster disk is, in reality, a set of different hard disks grouped in the mentioned volumes and controlled by the 
+\textit{gluster} daemons running on each node and the control daemon running only on the master node.
+
+\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
+%  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
+  \centering\includegraphics[scale=0.7]{images/cluster-gluster.png}
+  \caption{"View" of \textit{Gluster} distributed filesystem.}
+  \label{fig:cluster-gluster}
+\end{figure}
 
 %------------------------------------------------------------------------------
 \subsubsection{Using}
