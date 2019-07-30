@@ -288,15 +288,39 @@ significative number of different isotopes and is considered the heavy test pres
 that, due to lack of a proven thread-safe MPI implementation, the compiled version of Serpent runs only in one machine.
 This translates to the maximum of one node running on its full: 20 processors.
 
-The results of the this benchmark are presented in table \ref{table:benchmark-serpent}.
+The results of the this benchmark are presented in Table \ref{table:benchmark-serpent}.
+
+\begin{table}[ht]
+  \caption{Serpent benchmark}
+  \centering
+\begin{tabular}{c|c|r}
+Machine & \begin{tabular}[c]{@{}c@{}}Number\\ of processors\end{tabular} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Elapsed\\ time\end{tabular}} \\ \hline
+Desktop & 8                                                              & 00:21:34                                                                   \\
+Node    & 8                                                              & 00:12:46                                                                   \\
+Node    & 20                                                             & 00:05:12                                                                   \\
+Node    & 160                                                            & 00:00:42                                                                  
+\end{tabular}
+\label{table:benchmark-serpent}
+\end{table}
 
 The second benchmark uses MCNP6 and is a fairly simple simulation, consisting in simulating the response in dosis
 to a set of detectors scattered in surfaces in a room with a defined radiation source. This model
 was run using 8 processors (the maximum available at the desktop machine) in both desktop
 and node, plus 20 processors and 160 processors in the cluster.
 
-The results of MCNP simulations are shown in table \ref{table:benchmark-mcnp}.
+The results of MCNP simulations are shown in Table \ref{table:benchmark-mcnp}.
 
+\begin{table}[ht]
+  \caption{MCNP benchmark}
+  \centering
+\begin{tabular}{c|c|r}
+Machine & \begin{tabular}[c]{@{}c@{}}Number\\ of processors\end{tabular} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Elapsed\\ time\end{tabular}} \\ \hline
+Desktop & 8                                                              & 2 days, 08:26:43                                                                   \\
+Node    & 8                                                              & 1 day, 11:02:36                                                                   \\
+Node    & 20                                                             & 23:19:46                                                                   
+\end{tabular}
+\label{table:benchmark-mcnp}
+\end{table}
 
 
 %------------------------------------------------------------------------------
