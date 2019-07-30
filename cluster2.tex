@@ -174,7 +174,7 @@ XXXXXXXXXXXXXXXXXXXXx
 It is worth mention that among the main software solutions a simple and yet powerful package 
 allows the use of embedded temperature monitoring hardware to display system's temperature. 
 Although now only used on system administrator needs, it can be used to automate system's 
-responses in specific events. Off course, on top of the already available operational systems 
+responses in specific events. Of course, on top of the already available operational systems 
 safety measures. 
 
 %------------------------------------------------------------------------------
@@ -201,14 +201,22 @@ gluster disk is, in reality, a set of different hard disks grouped in the mentio
 \begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
 %  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
   \centering\includegraphics[scale=0.7]{images/cluster-gluster.png}
-  \caption{"View" of \textit{Gluster} distributed filesystem.}
+  \caption{``View'' of \textit{Gluster} distributed filesystem.}
   \label{fig:cluster-gluster}
 \end{figure}
 
 %------------------------------------------------------------------------------
-\subsubsection{Using}
+\subsection{Job scheduler}
 \label{ssec:slurm}
 
+%Jobs: Tenho que explicar o Slurm\cite{slurm} e cita-lo.
+
+
+\subsubsection{System use: basics}
+The access to the cluster system is made as simple as possible. However, the absence of a Graphical User Interface
+(GUI) slightly increases system's difficult of use, specially for those not used to command line. That said, only
+a handful of commands are necessary to login, check jobs queue and submit a job. System's login screen is shown
+in Figure \ref{fig:login-screen}.
 
 \begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
   \centering\includegraphics[scale=0.7]{images/p1login.png}
@@ -216,10 +224,13 @@ gluster disk is, in reality, a set of different hard disks grouped in the mentio
   \label{fig:login-screen}
 \end{figure}
 
-Jobs: Tenho que explicar o Slurm\cite{slurm} e cita-lo.
+Of course, a basic understanding on how to use Linux shell can be of great value of productivity for users.
+Those users with basic knowledge on shell scripting are the best served as they will be able to fine tuning
+their simulations trought scripts. That said, a basic recommendation to all users is to carefully read and
+study Chapter 1 and 2 of reference\cite{ECP}.
 
 %------------------------------------------------------------------------------
-\subsubsection{Monitoring}
+\subsection{System monitoring tool}
 \label{ssec:ganglia}
 
 http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apache\cite{apache}.
@@ -272,16 +283,25 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
 
 \begin{thebibliography}{99} %99 é o número máximo que o thebibliography permite. Numero de referencias que aparecerão.
 
-\bibitem{linux} ``The Linux Documentation Project'', \\\verb#http://www.tldp.org/LDP/intro-linux/html/chap_01.html# (2019).
-
+\bibitem{cluster17} Vitor V. A. Silva, Andr\'{e} A. C. dos Santos and Renan O. Cunha, ``Professional Cluster Management
+  by a small scientific team: challenges, solutions and perspectives'', \textit{XX ENFIR INAC 2017 International Nuclear Atlantic Conference }, Belo Horizonte, MG, Brazil, pp. xx-yy, October, (2017). 
+  
+  %\bibitem{linux} ``The Linux Documentation Project'', \\\verb#http://www.tldp.org/LDP/intro-linux/html/chap_01.html# (2019).
+  
 \bibitem{Dongarra2017} John Dongarra et. al., ``With Extreme Computing, the Rules Have Changed'', \textit{Computing in Science Engineering}, \textbf{19}, pp. 52--62, (2017).
-
+  
 \bibitem{CUDA} John Nickolls, Ian Buck, Michael Garland and Kevin Skadron, ``Scalable Parallel Programming with CUDA'', \textit{Queue - GPU Computing}, \textbf{6}, pp. 40--53, (2008).
-
+  
 \bibitem{accelerators} David Tarditi, Sidd Puri, and Jose Oglesby, ``Accelerator: using data parallelism to program GPUs for general-purpose uses'',  \textit{SIGPLAN Not. 41}, \textbf{11}, pp. 325--335. DOI: https://doi.org/10.1145/1168918.1168898 (2006).
 
-%\bibitem{windows7} Jorge Orchilles, \textit{Microsoft Windows 7 Administrator's Reference}, Syngress, Boston USA (2010).
+\bibitem{ECP} Anthony Scopatz and Kathryn Huff, \textit{Effective Computation in Physics: Field Guide to Research with Python}, O'Reilly Media, ISBN 978-1491901533, (2015).
   
+\bibitem{slurm} SLURM.
+  
+  %\bibitem{windows7} Jorge Orchilles, \textit{Microsoft Windows 7 Administrator's Reference}, Syngress, Boston USA (2010).
+
+\bibitem{ganglia} Matt Massie, Bernard Li, Brad Nicholes and Vladmir Vuksan, \textit{Monitoring with Ganglia}, O'Reilly Media, ISBN 978-1449329709, (2012).
+
   % Centos
 \bibitem{centos} ``The CentOS Project'', \verb#https://www.centos.org# (2017).
 
@@ -310,14 +330,7 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
 
 \bibitem{opencl} J. E. Stone, D. Gohara and G. Shi, ``OpenCL: A Parallel Programming Standard for Heterogeneous Computing Systems'', \textit{Computing in Science \& Engineering}, \textbf{12(3)}, pp. 66--73, May-June (2010).
 
-\bibitem{cluster17} Vitor V. A. Silva, Andr\'{e} A. C. dos Santos and Renan O. Cunha, ``Professional Cluster Management
-    by a small scientific team: challenges, solutions and perspectives'', \textit{XX ENFIR INAC 2017 International Nuclear Atlantic Conference }, Belo Horizonte, MG, Brazil, pp. xx-yy, October, (2017). 
-
-  \bibitem{slurm} SLURM.
-    
   \bibitem{apache} APACHE.
-    
-  \bibitem{ganglia} GANGLIA.
     
 \end{thebibliography}
 
