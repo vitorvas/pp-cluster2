@@ -233,6 +233,11 @@ study Chapter 1 and 2 of reference\cite{ECP}.
 \subsection{System monitoring tool}
 \label{ssec:ganglia}
 
+At this point is clear the importance to be able to submit jobs, have them scheduled following priorities
+and having a load balacing scheme to help optimizing the clusters resources. Nonetheless, the ability to
+monitor (or check) system's load on different nodes, taking account different resources - memory, disk, IO,
+etc. - without the need to log in to the system is 
+
 http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apache\cite{apache}.
 
 \begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
@@ -258,9 +263,46 @@ http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apa
 
 \section{RESULTS AND ANALYSIS}
 
+At the time of writing these lines, the system is up and running non-stop for 92 days. This is a
+basic measurement of it robustness. A total of $907$ jobs were submitted since the installation
+of the scheduler, including failing jobs,
+test jobs and also working cases jobs. The bulk of most submitted jobs are thermal-hydraulics
+simulations using ANSYS CFX and ANSYS Fluent. Only a part of all simulations are related to neutronics.
+The reason for that is fairly simple: the workflow is completely dictated by the needs of users
+and during the last 2 months of system monitoring most sheduled works were from students of mechanical
+and aerospatial engineering finishing their final undergraduation works.
+
+In order to present some quantitative results two neutronics problems were modelled. The hardware used
+to run these problems is:
+
+\begin{itemize}
+\item Desktop: Intel(R) Xeon(R) CPU E5520 @ 2.27GHz, 8 CPUs, 48Gb RAM.
+\item Nodes: Intel(R) Xeon(R) CPU E5-2640 v4 @ 2.40GHz, 20 CPUs, 32Gb RAM.
+\end{itemize}
+
+The number of available nodes is 8, although not used for both simulations.
+
+One simulation was run using Serpent Nuclear code, installed in both the cluster and desktop machines at the Thermal-Hydraulics
+and Neutronics Laboratory (LTHN), version 2.1.31 compiled to make use of OpenMP\cite{openMP}. This simulation involves burning
+significative number of different isotopes and is considered the heavy test presented in this work. It is worth mentioning
+that, due to lack of a proven thread-safe MPI implementation, the compiled version of Serpent runs only in one machine.
+This translates to the maximum of one node running on its full: 20 processors.
+
+The results of the this benchmark are presented in table \ref{table:benchmark-serpent}.
+
+The second benchmark uses MCNP6 and is a fairly simple simulation, consisting in simulating the response in dosis
+to a set of detectors scattered in surfaces in a room with a defined radiation source. This model
+was run using 8 processors (the maximum available at the desktop machine) in both desktop
+and node, plus 20 processors and 160 processors in the cluster.
+
+The results of MCNP simulations are shown in table \ref{table:benchmark-mcnp}.
+
+
+
 %------------------------------------------------------------------------------
 
 \section{CONCLUSIONS AND PERSPECTIVES}
+
 
 (O que está bom, o que está ruim na atual instalação)
 (Trabalhos futuros: pra onde ir (operação), possíveis mudanças)
