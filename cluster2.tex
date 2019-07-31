@@ -164,7 +164,25 @@ an extra $1.5$Tb of storage for the whole system.
 %------------------------------------------------------------------------------
 \subsubsection{NAS}
 
-XXXXXXXXXXXXXXXXXXXXx
+NAS (Network Attached Storage) is a computer data storage server connected to a computer
+network with the objective to serve files for the computers attached to this network. This
+dedicated hardware is used in the cluster system to provide a directory where users accounts
+are kept. The system used is a NAS Synology DS1817, using its proprietary DSM system, version
+6.2.1 and has 4Gb RAM. It is equiped with 8 identical hard-disks, each one of 3.7 Tb of space.
+
+Internally, the system is configured with two volumes, both operating as RAID 10,
+which means that data is replicated and that only half of the whole available space
+can be used since the other half mirrors the data as a backup, making the total
+of 7.21 Tb available at each volume.
+
+The space where the users accounts are kept is mapped as NFS (Network File System) at the
+cluster itself and quotas are kept to avoid system malfunction due to poor resources management
+by the users.
+
+The NAS is connected to the cluster system trough a bond connection. The bond connection is a logical
+connection which uses two 10 Gbits connection to improve traffic band and is completely hidden from
+the cluster system, which ``sees'' a 20 Gbits connection and one IP address.
+
 
 %------------------------------------------------------------------------------
 \subsection{Software Solutions}
@@ -233,10 +251,10 @@ study Chapter 1 and 2 of reference\cite{ECP}.
 \subsection{System monitoring tool}
 \label{ssec:ganglia}
 
-At this point is clear the importance to be able to submit jobs, have them scheduled following priorities
-and having a load balacing scheme to help optimizing the clusters resources. Nonetheless, the ability to
-monitor (or check) system's load on different nodes, taking account different resources - memory, disk, IO,
-etc. - without the need to log in to the system is 
+At this point it is clear the importance to be able to submit jobs, have them scheduled following priorities
+and having a load balacing scheme to help optimizing the cluster's resources. Nonetheless, the ability to
+monitor and check system's load on different nodes, taking account different resources - memory, disk, IO,
+etc. - without the need to log in to the system is, at the minimum, practical.
 
 http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apache\cite{apache}.
 
@@ -247,17 +265,17 @@ http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apa
   \label{fig:ganglia-rainbow}
 \end{figure}
 
-\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
-  \centering\includegraphics[scale=0.7]{images/ganglia_colors.png}
-  \caption{Color reference screen showing nodes loads.}
-  \label{fig:ganglia-colors}
-\end{figure}
+%\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
+%  \centering\includegraphics[scale=0.7]{images/ganglia_colors.png}
+%  \caption{Color reference screen showing nodes loads.}
+%  \label{fig:ganglia-colors}
+%\end{figure}
 
-\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
-  \centering\includegraphics[scale=0.5]{images/ganglia_nodes.png}
-  \caption{Nodes load on the monitoring system.}
-  \label{fig:ganglia-nodes}
-\end{figure}
+%\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
+%  \centering\includegraphics[scale=0.5]{images/ganglia_nodes.png}
+%  \caption{Nodes load on the monitoring system.}
+%  \label{fig:ganglia-nodes}
+%\end{figure}
 
 %------------------------------------------------------------------------------
 
