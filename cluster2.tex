@@ -371,10 +371,25 @@ Node    & 20                                                             & 23:19
 
 \section{CONCLUSIONS AND PERSPECTIVES}
 
+The LTHN cluster works with robustness, being up for 93 days non-stop at the time of this writing.
+It is used without issues by a group of about 10 users. That said, some improvements are envisaged, most
+of them external to the cluster itself.
 
-(O que está bom, o que está ruim na atual instalação)
-(Trabalhos futuros: pra onde ir (operação), possíveis mudanças)
-(Olhar no plans o que falta)
+The environmental one is to automatize power monitoring by means of connecting a software monitor systems to
+the no-break and power supplies of the system, adding the ability to the system to shutdown in case
+of a likely to happen power outage. A similar project concerning the air-conditioning system is envisaged,
+by the use of a single board computer and temperature sensors.
+
+However, the main work on cluster improvement is to take advantage of the GPUs (Graphics Processing Units) to
+visualize data. Two options are under consideration: one is the use of VirtualGL \cite{virtualgl}. It is an
+open source toolkit that gives to Linux and Unix remote display software the ability to run OpenGL applications
+with full hardware acceleration. The limitation of this approach is that machines running other operating
+systems will not be able to take advantage of remote visualization. The other option is to make use of
+Paraview \cite{Paraview} in client-server mode. Instances of paraview server would run on nodes and
+locally use GPUs to render data. These data is then accessed by paraview clients running on ordinary machines,
+with no need of special hardware. Both options are under study and, decision made, the implementation of the
+solution will be probably done on the first half of 2020.
+
 
 %Uma cita\c{c}\~{a}o \cite{Henderson17}.
 
