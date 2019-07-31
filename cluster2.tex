@@ -190,7 +190,7 @@ safety measures.
 %------------------------------------------------------------------------------
 \subsection{File System}
 
-During the installation phase of the cluster system\cite{cluster17} there were two the contenders for
+During the installation phase of the cluster system there were two the contenders for
 distributed filesystem solution. The chosen one is described below.
 
 %------------------------------------------------------------------------------
@@ -219,8 +219,7 @@ gluster disk is, in reality, a set of different hard disks grouped in the mentio
 \subsection{Job scheduler}
 \label{ssec:slurm}
 
-%Jobs: Tenho que explicar o Slurm\cite{slurm} e cita-lo.
-\textit{Slurm} \cite{slurm} is an open source and scalable workload manager, widely used for large
+\textit{Slurm}\cite{slurm} is an open source and scalable workload manager, widely used for large
 and small - the present case - Linux clusters. It is transparent to the kernel, needing no changes in
 kernel modules to fully work.
 
@@ -266,9 +265,7 @@ and having a load balacing scheme to help optimizing the cluster's resources. No
 monitor and check system's load on different nodes, taking account different resources - memory, disk, IO,
 etc. - without the need to log in to the system is, at the minimum, practical.
 
-%http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apache\cite{apache}.
-
-This fundamental task is acomplished by \textit{Ganglia} \cite{ganglia}, a monitoring system built in
+This fundamental task is acomplished by \textit{Ganglia}\cite{ganglia}, a monitoring system built in
 a modular design which offers a web interface to access monitoring data. Figure \ref{fig:ganglia-rainbow} shows
 one of the graphics provided by default by it. In this example, the relative load of nodes is show in time,
 one color by node.
@@ -287,7 +284,7 @@ So, all data, as configured by the system administrator, can be checked by any u
 web server.
 
 It is worth mentioning that the type of data collected can be extended by the use of modules. The development
-of new modules is done using an API (Application Programming Interface) based on Apache webserver API \cite{apache}
+of new modules is done using an API (Application Programming Interface) based on Apache webserver API\cite{apache}
 and no changes to \textit{Ganglia} have to be done: the module can be simply loaded by it.
 
 %\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
@@ -381,11 +378,11 @@ of a likely to happen power outage. A similar project concerning the air-conditi
 by the use of a single board computer and temperature sensors.
 
 However, the main work on cluster improvement is to take advantage of the GPUs (Graphics Processing Units) to
-visualize data. Two options are under consideration: one is the use of VirtualGL \cite{virtualgl}. It is an
+visualize data. Two options are under consideration: one is the use of VirtualGL\cite{virtualgl}. It is an
 open source toolkit that gives to Linux and Unix remote display software the ability to run OpenGL applications
 with full hardware acceleration. The limitation of this approach is that machines running other operating
 systems will not be able to take advantage of remote visualization. The other option is to make use of
-Paraview \cite{Paraview} in client-server mode. Instances of paraview server would run on nodes and
+Paraview\cite{paraview} in client-server mode. Instances of paraview server would run on nodes and
 locally use GPUs to render data. These data is then accessed by paraview clients running on ordinary machines,
 with no need of special hardware. Both options are under study and, decision made, the implementation of the
 solution will be probably done on the first half of 2020.
@@ -419,43 +416,25 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
   
 \bibitem{accelerators} David Tarditi, Sidd Puri, and Jose Oglesby, ``Accelerator: using data parallelism to program GPUs for general-purpose uses'',  \textit{SIGPLAN Not. 41}, \textbf{11}, pp. 325--335. DOI: https://doi.org/10.1145/1168918.1168898 (2006).
 
-\bibitem{ECP} Anthony Scopatz and Kathryn Huff, \textit{Effective Computation in Physics: Field Guide to Research with Python}, O'Reilly Media, ISBN 978-1491901533, (2015).
-  
+\bibitem{gluster} Alex Davies and Alessandro Orsaria, ``Scale out with GlusterFS'', \textit{The Linux Journal}, \textbf{2013}, (2013).
+
 \bibitem{slurm} A. Yoo, M. Jette, and M. Grondona, ``Slurm: Simple Linux Utility for Resource Management'', Job Scheduling Strategies for Parallel Processing, \textbf{2862} of \textit{Lecture Notes in Computer Science}, pp. 44--60, Springer-Verlag, (2003).
-  
+
+  \bibitem{ECP} Anthony Scopatz and Kathryn Huff, \textit{Effective Computation in Physics: Field Guide to Research with Python}, O'Reilly Media, ISBN 978-1491901533, (2015).
+
   %\bibitem{windows7} Jorge Orchilles, \textit{Microsoft Windows 7 Administrator's Reference}, Syngress, Boston USA (2010).
 
 \bibitem{ganglia} Matt Massie, Bernard Li, Brad Nicholes and Vladmir Vuksan, \textit{Monitoring with Ganglia}, O'Reilly Media, ISBN 978-1449329709, (2012).
 
+\bibitem{apache} Ryan B. Bloom. \textit{Apache Server 2.0: The Complete Reference}, McGraw-Hill, Inc., New York, NY, USA (2002).
+  
   \bibitem{openmp} Leonardo Dagum and Ramesh Menon. ``OpenMP: An Industry-Standard API for Shared-Memory Programming'', \textit{IEEE Comput. Sci. Eng.}, \textbf{5}, 1, pp. 46--55, (1998), DOI: https://doi.org/10.1109/99.660313 
-  % Centos
-\bibitem{centos} ``The CentOS Project'', \verb#https://www.centos.org# (2017).
 
-\bibitem{yum} ``man7.org yum man page'', \verb#http://man7.org/linux/man-pages/man8/yum.8.html# (2017).
-  
-\bibitem{Boettiger} Carl Boettiger, ``An introduction to Docker for reproducible research'', \textit{SIGOPS Operating System Review}, \textbf{49}, pp. 71--79, (2015).
-
-\bibitem{Tommaso} Paolo Di Tommaso et al. ``The Impact of Docker Containers on the Performance of Genomic Pipelines'' \textit{PeerJ}, \textbf{3}, (2015).
-
-  % Virtualizacao (9 e 10)
-\bibitem{vir1} A. J. Younge and G. C. Fox, ``Advanced Virtualization Techniques for High Performance Cloud Cyberinfrastructure'', \textit{2014 14th IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing}, Chicago, IL, USA, pp. 583--586, May, (2014).
-  
-\bibitem{vir2} I. Sadooghi, J. H. Martin, T. Li, K. Brandstatter, K. Maheshwari, T. P. P. de Lacerda Ruivo, G. Garzoglio, S. Timm, Y. Zhao and I. Raicu, ``Understanding the Performance and Potential of Cloud Computing for Scientific Applications'', \textit{IEEE Transactions on Cloud Computing}, \textbf{5}, pp. 358--371, (2017).
-  
-\bibitem{linuxbook} Wirzenius and Lars, \textit{The  Linux System Administrator's Guide}, iUniverse incorporated (2000).
-
-\bibitem{hal} Benjamin Depardon, Ga\"{e}l Le Mahec and Cyril S\'{e}guin, ``Analysis of Six Distributed File Systems'', Research Report, pp. 44, (2013).
-  
-\bibitem{gluster} Alex Davies and Alessandro Orsaria, ``Scale out with GlusterFS'', \textit{The Linux Journal}, \textbf{2013}, (2013).
-
-%\bibitem{lustre} ``Lustre* Software Release 2.x: Operations Manual'', Editor: Intel Corporation, (2017).
+\bibitem{virtualgl} ``A Brief Introduction to VirtualGL'', \verb#https://virtualgl.org/About/Introduction# (2019).
 
 \bibitem{paraview} Ayachit, Utkarsh, \textit{The ParaView Guide: A Parallel Visualization Application}, Kitware, ISBN 978-1930934306, (2015).
-
-\bibitem{gpgpu}  John D. Owens, David Luebke, Naga Govindaraju, Mark Harris, Jens Kr\"{u}ger, Aaron E. Lefohn, and Tim Purcell, ``A Survey of General-Purpose Computation on Graphics Hardware'', \textit{Computer Graphics Forum}, \textbf{26(1)}, pp. 80--113, March (2007).
-
-\bibitem{opencl} J. E. Stone, D. Gohara and G. Shi, ``OpenCL: A Parallel Programming Standard for Heterogeneous Computing Systems'', \textit{Computing in Science \& Engineering}, \textbf{12(3)}, pp. 66--73, May-June (2010).
-
+  
+  
 %  \bibitem{apache} APACHE.
     
 \end{thebibliography}
