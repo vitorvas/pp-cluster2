@@ -102,7 +102,7 @@ on this matter is given by Dongarra\cite{Dongarra2017}.
 %------------------------------------------------------------------------------
 \section{OBJECTIVE}
 
-The objective of this work is to present the current status of the cluster equipament 
+The objective of this work is to present the current status of the cluster equipment 
 at the Laboratory of Thermal-hydraulics and Neutronics of CDTN (\textbf{LTHN}), describing the decisions 
 taken during the installation process, the solutions applied to common (and uncommon) problems 
 derived from running a professional cluster system. Together with technical decisions, the 
@@ -137,7 +137,7 @@ last years\cite{accelerators}.
 The \textit{master} node is a Dell Precision T7910. The main
 differences between the \textit{master} node and the \textit{slaves} machines are two: the \textit{master} has
 a slightly worst graphics card, a Quadro{\textregistered} M2000 with $4$Gb of memory. However, the second difference
-is the ammount of RAM memory. The nodes are equipped with $32$Gb of memory whereas the \textit{master} has
+is the amount of RAM memory. The nodes are equipped with $32$Gb of memory whereas the \textit{master} has
 $256$Gb of RAM.
 
 
@@ -155,7 +155,7 @@ NAS (Network Attached Storage) is a computer data storage server connected to a 
 network with the objective to serve files for the computers attached to this network. This
 dedicated hardware is used in the cluster system to provide a directory where users accounts
 are kept. The system used is a NAS Synology DS1817, using its proprietary DSM system, version
-6.2.1 and has 4Gb RAM. It is equiped with 8 identical hard-disks, each one of 3.7 Tb of space.
+6.2.1 and has 4Gb RAM. It is equipped with 8 identical hard-disks, each one of 3.7 Tb of space.
 
 Internally, the system is configured with two volumes, both operating as RAID 10,
 which means that data is replicated and that only half of the whole available space
@@ -191,7 +191,7 @@ safety measures.
 \subsection{File System}
 
 During the installation phase of the cluster system there were two the contenders for
-distributed filesystem solution. The chosen one is described below.
+distributed file system solution. The chosen one is described below.
 
 %------------------------------------------------------------------------------
 \subsubsection{Gluster File System}
@@ -203,7 +203,7 @@ small number of physical disks and nodes (nine).
 \begin{figure}[ht] % t forces top and b forces bottom: can be added to h, ex. [ht]
 %  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
   \centering\includegraphics[scale=0.7]{images/cluster-gluster.png}
-  \caption{``View'' of \textit{Gluster} distributed filesystem.}
+  \caption{``View'' of \textit{Gluster} distributed file system.}
   \label{fig:cluster-gluster}
 \end{figure}
 
@@ -223,14 +223,14 @@ gluster disk is, in reality, a set of different hard disks grouped in the mentio
 and small - the present case - Linux clusters. It is transparent to the kernel, needing no changes in
 kernel modules to fully work.
 
-Its archtecture is relatively simple, having a centralized manager called \texttt{slurmctld} reponsible for
+Its architecture is relatively simple, having a centralized manager called \texttt{slurmctld} responsible for
 monitoring resources and workload. Each node has a daemon called \texttt{slurmd} which is responsible for
 wait for and execute work, return status and communicate to the manager. An optional database daemon
 (\texttt{slurmdbd}) can be used to record account information. This database is installed in the cluster
 system described in this paper.
 
 Together with daemons, \textit{Slurm} provides a set of commands which are the interface between users
-and the scheduler, used by the users to run, check, cancel and control theirs jobs. A glimpsy of \textit{Slurm}
+and the scheduler, used by the users to run, check, cancel and control theirs jobs. A glimpse of \textit{Slurm}
 architecture is presented in Figure \ref{fig:slurm}.
 
 \begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
@@ -253,7 +253,7 @@ in Figure \ref{fig:login-screen}.
 
 Of course, a basic understanding on how to use Linux shell can be of great value of productivity for users.
 Those users with basic knowledge on shell scripting are the best served as they will be able to fine tuning
-their simulations trought scripts. That said, a basic recommendation to all users is to carefully read and
+their simulations through scripts. That said, a basic recommendation to all users is to carefully read and
 study Chapter 1 and 2 of reference\cite{ECP}.
 
 %------------------------------------------------------------------------------
@@ -261,11 +261,11 @@ study Chapter 1 and 2 of reference\cite{ECP}.
 \label{ssec:ganglia}
 
 At this point it is clear the importance to be able to submit jobs, have them scheduled following priorities
-and having a load balacing scheme to help optimizing the cluster's resources. Nonetheless, the ability to
+and having a load balancing scheme to help optimizing the cluster's resources. Nonetheless, the ability to
 monitor and check system's load on different nodes, taking account different resources - memory, disk, IO,
 etc. - without the need to log in to the system is, at the minimum, practical.
 
-This fundamental task is acomplished by \textit{Ganglia}\cite{ganglia}, a monitoring system built in
+This fundamental task is accomplished by \textit{Ganglia}\cite{ganglia}, a monitoring system built in
 a modular design which offers a web interface to access monitoring data. Figure \ref{fig:ganglia-rainbow} shows
 one of the graphics provided by default by it. In this example, the relative load of nodes is show in time,
 one color by node.
@@ -277,14 +277,14 @@ one color by node.
   \label{fig:ganglia-rainbow}
 \end{figure}
 
-The archictecture of \textit{Ganglia} is out of the scope of this paper, but can be said that it has metadata
+The architecture of \textit{Ganglia} is out of the scope of this paper, but can be said that it has metadata
 daemons working in multicast mode. In other words, every node collects and shares information with one or
 more monitors - the cluster system only uses one - which shares this information by the use of a web server.
 So, all data, as configured by the system administrator, can be checked by any user with access to the
 web server.
 
 It is worth mentioning that the type of data collected can be extended by the use of modules. The development
-of new modules is done using an API (Application Programming Interface) based on Apache webserver API\cite{apache}
+of new modules is done using an API (Application Programming Interface) based on Apache web server API\cite{apache}
 and no changes to \textit{Ganglia} have to be done: the module can be simply loaded by it.
 
 %\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
@@ -406,7 +406,7 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
 \begin{thebibliography}{99} %99 é o número máximo que o thebibliography permite. Numero de referencias que aparecerão.
 
 \bibitem{cluster17} Vitor V. A. Silva, Andr\'{e} A. C. dos Santos and Renan O. Cunha, ``Professional Cluster Management
-  by a small scientific team: challenges, solutions and perspectives'', \textit{XX ENFIR INAC 2017 International Nuclear Atlantic Conference }, Belo Horizonte, MG, Brazil, pp. xx-yy, October, (2017). 
+  by a small scientific team: challenges, solutions and perspectives'', \textit{XX ENFIR INAC 2017 International Nuclear Atlantic Conference }, Belo Horizonte, MG, Brazil, October, (2017). 
   
   %\bibitem{linux} ``The Linux Documentation Project'', \\\verb#http://www.tldp.org/LDP/intro-linux/html/chap_01.html# (2019).
   
