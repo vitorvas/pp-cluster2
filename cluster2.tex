@@ -311,9 +311,10 @@ basic measurement of it robustness. A total of $907$ jobs were submitted since t
 of the scheduler, including failing jobs,
 test jobs and also working cases jobs. The bulk of most submitted jobs are thermal-hydraulics
 simulations using ANSYS CFX and ANSYS Fluent. Only a part of all simulations are related to neutronics.
-The reason for that is fairly simple: the workflow is completely dictated by the needs of users
-and during the last 2 months of system monitoring most sheduled works were from students of mechanical
-and aerospatial engineering finishing their final undergraduation works.
+There is no special reason for this bias in favor of thermal-hydraulics than the recent need of the users.
+%The reason for that is fairly simple: the workflow is completely dictated by the needs of users
+%and during the last 2 months of system monitoring most sheduled works were from students of mechanical
+%and aerospatial engineering finishing their final undergraduation works.
 
 In order to present some quantitative results two neutronics problems were modelled. The hardware used
 to run these problems is:
@@ -326,7 +327,7 @@ to run these problems is:
 The number of available nodes is 8, although not used for both simulations.
 
 One simulation was run using Serpent Nuclear code, installed in both the cluster and desktop machines at the Thermal-Hydraulics
-and Neutronics Laboratory (LTHN), version 2.1.31 compiled to make use of OpenMP\cite{openMP}. This simulation involves burning
+and Neutronics Laboratory (LTHN), version 2.1.31 compiled to make use of OpenMP\cite{openmp}. This simulation involves burning
 significative number of different isotopes and is considered the heavy test presented in this work. It is worth mentioning
 that, due to lack of a proven thread-safe MPI implementation, the compiled version of Serpent runs only in one machine.
 This translates to the maximum of one node running on its full: 20 processors.
@@ -411,6 +412,7 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
 
 \bibitem{ganglia} Matt Massie, Bernard Li, Brad Nicholes and Vladmir Vuksan, \textit{Monitoring with Ganglia}, O'Reilly Media, ISBN 978-1449329709, (2012).
 
+  \bibitem{openmp} Leonardo Dagum and Ramesh Menon. ``OpenMP: An Industry-Standard API for Shared-Memory Programming'', \textit{IEEE Comput. Sci. Eng.}, \textbf{5}, 1, pp. 46--55, (1998), DOI: https://doi.org/10.1109/99.660313 
   % Centos
 \bibitem{centos} ``The CentOS Project'', \verb#https://www.centos.org# (2017).
 
@@ -439,7 +441,7 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
 
 \bibitem{opencl} J. E. Stone, D. Gohara and G. Shi, ``OpenCL: A Parallel Programming Standard for Heterogeneous Computing Systems'', \textit{Computing in Science \& Engineering}, \textbf{12(3)}, pp. 66--73, May-June (2010).
 
-  \bibitem{apache} APACHE.
+%  \bibitem{apache} APACHE.
     
 \end{thebibliography}
 
