@@ -113,19 +113,6 @@ team.
 %------------------------------------------------------------------------------
 \section{METHODS AND PROCEDURES}
 
-*************************************************************\\
-Main information to be detailed: the cluster uses hostbased authentication, GPU used via 
-vnc, \texttt{data} directory at each user account pointing to gluster, how many gluster 
-volumes (why two, how they are configured - distributed) and what each one stores, 
-the NAS configuration (related to the cluster).
-
-Must update the old figures accordingly. Pehaps add two more figures showing NAS 
-and on the internal structure of gluster/NAS.
-
-List the applications running (if possible with some benchmarks) and installed. 
-Future work, if something is still missing.
-
-************************************************************\\
 
 %------------------------------------------------------------------------------
 \subsection{Hardware}
@@ -185,6 +172,11 @@ the cluster system, which ``sees'' a 20 Gbits connection and one IP address.
 
 
 %------------------------------------------------------------------------------
+%\subsection{Applications}
+%\label{sub:apps}
+
+
+%------------------------------------------------------------------------------
 \subsection{Software Solutions}
 \label{sub:ssol}
 
@@ -208,6 +200,13 @@ GlusterFS\cite{gluster} is an open source, distributed file system and has
 a unique no-metadata server architecture. This is the chosen solution for the system due to its relatively
 small number of physical disks and nodes (nine).
 
+\begin{figure}[ht] % t forces top and b forces bottom: can be added to h, ex. [ht]
+%  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
+  \centering\includegraphics[scale=0.7]{images/cluster-gluster.png}
+  \caption{``View'' of \textit{Gluster} distributed filesystem.}
+  \label{fig:cluster-gluster}
+\end{figure}
+
 The system is configured to use two \textit{gluster} volumes, namely \texttt{gv-apps} and \texttt{gv-data}. Both volumes
 are configured as \textit{distributed} without replication. Since the whole system has an extra NAS device, there is
 no need of keeping redundant data. The \texttt{gv-data} offers $N$ Gb of storage per user and is used to run simulations or any task that needs storage during execution. After that, data must be moved to a storage space on NAS where an automatized regular backup avoids data loss.
@@ -216,19 +215,30 @@ Figure \ref{fig:cluster-gluster} shows the "software" view of \textit{gluster} b
 gluster disk is, in reality, a set of different hard disks grouped in the mentioned volumes and controlled by the 
 \textit{gluster} daemons running on each node and the control daemon running only on the master node.
 
-\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
-%  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
-  \centering\includegraphics[scale=0.7]{images/cluster-gluster.png}
-  \caption{``View'' of \textit{Gluster} distributed filesystem.}
-  \label{fig:cluster-gluster}
-\end{figure}
-
 %------------------------------------------------------------------------------
 \subsection{Job scheduler}
 \label{ssec:slurm}
 
 %Jobs: Tenho que explicar o Slurm\cite{slurm} e cita-lo.
+\textit{Slurm} \cite{slurm} is an open source and scalable workload manager, widely used for large
+and small - the present case - Linux clusters. It is transparent to the kernel, needing no changes in
+kernel modules to fully work.
 
+Its archtecture is relatively simple, having a centralized manager called \texttt{slurmctld} reponsible for
+monitoring resources and workload. Each node has a daemon called \texttt{slurmd} which is responsible for
+wait for and execute work, return status and communicate to the manager. An optional database daemon
+(\texttt{slurmdbd}) can be used to record account information. This database is installed in the cluster
+system described in this paper.
+
+Together with daemons, \textit{Slurm} provides a set of commands which are the interface between users
+and the scheduler, used by the users to run, check, cancel and control theirs jobs. A glimpsy of \textit{Slurm}
+architecture is presented in Figure \ref{fig:slurm}.
+
+\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
+  \centering\includegraphics[scale=0.5]{images/slurm-arch.png}
+  \caption{Slurm architecture. (Source: Slurm website)}
+  \label{fig:slurm}
+\end{figure}
 
 \subsubsection{System use: basics}
 The access to the cluster system is made as simple as possible. However, the absence of a Graphical User Interface
@@ -256,14 +266,29 @@ and having a load balacing scheme to help optimizing the cluster's resources. No
 monitor and check system's load on different nodes, taking account different resources - memory, disk, IO,
 etc. - without the need to log in to the system is, at the minimum, practical.
 
-http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apache\cite{apache}.
+%http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apache\cite{apache}.
 
-\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
+This fundamental task is acomplished by \textit{Ganglia} \cite{ganglia}, a monitoring system built in
+a modular design which offers a web interface to access monitoring data. Figure \ref{fig:ganglia-rainbow} shows
+one of the graphics provided by default by it. In this example, the relative load of nodes is show in time,
+one color by node.
+
+\begin{figure}[th] % t forces top and b forces bottom: can be added to h, ex. [ht]
 %  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
   \centering\includegraphics[scale=0.55]{images/ganglia_rainbow.png}
   \caption{A color graphic showing relative node use.}
   \label{fig:ganglia-rainbow}
 \end{figure}
+
+The archictecture of \textit{Ganglia} is out of the scope of this paper, but can be said that it has metadata
+daemons working in multicast mode. In other words, every node collects and shares information with one or
+more monitors - the cluster system only uses one - which shares this information by the use of a web server.
+So, all data, as configured by the system administrator, can be checked by any user with access to the
+web server.
+
+It is worth mentioning that the type of data collected can be extended by the use of modules. The development
+of new modules is done using an API (Application Programming Interface) based on Apache webserver API \cite{apache}
+and no changes to \textit{Ganglia} have to be done: the module can be simply loaded by it.
 
 %\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
 %  \centering\includegraphics[scale=0.7]{images/ganglia_colors.png}
@@ -281,7 +306,7 @@ http: Tenho que explicar o Ganglia\cite{ganglia} e cita-lo. Ao menos citar o Apa
 
 \section{RESULTS AND ANALYSIS}
 
-At the time of writing these lines, the system is up and running non-stop for 92 days. This is a
+At the time of writing these lines, the system is up and running non-stop for 93 days. This is a
 basic measurement of it robustness. A total of $907$ jobs were submitted since the installation
 of the scheduler, including failing jobs,
 test jobs and also working cases jobs. The bulk of most submitted jobs are thermal-hydraulics
@@ -380,7 +405,7 @@ The authors also thank Dr. Jo\~{a}o Roberto Loureiro de Mattos, now retired, for
 
 \bibitem{ECP} Anthony Scopatz and Kathryn Huff, \textit{Effective Computation in Physics: Field Guide to Research with Python}, O'Reilly Media, ISBN 978-1491901533, (2015).
   
-\bibitem{slurm} SLURM.
+\bibitem{slurm} A. Yoo, M. Jette, and M. Grondona, ``Slurm: Simple Linux Utility for Resource Management'', Job Scheduling Strategies for Parallel Processing, \textbf{2862} of \textit{Lecture Notes in Computer Science}, pp. 44--60, Springer-Verlag, (2003).
   
   %\bibitem{windows7} Jorge Orchilles, \textit{Microsoft Windows 7 Administrator's Reference}, Syngress, Boston USA (2010).
 
